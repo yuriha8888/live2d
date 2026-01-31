@@ -9,8 +9,13 @@
 body {
   margin: 0;
   padding: 0;
-  background: transparent;
+  background-color: #acc9fc;
   font-family: Arial, sans-serif;
+}
+
+/* 전체 래퍼 */
+.wrapper {
+  padding: 14px 0 20px 0;
 }
 
 /* 제목 */
@@ -18,15 +23,16 @@ body {
   text-align: center;
   font-size: 20px;
   font-weight: bold;
-  margin: 12px 0 6px 0;
+  color: #1f2d5a;
+  margin-bottom: 6px;
 }
 
-/* 설명(선택) */
+/* 부제 */
 .subtitle {
   text-align: center;
   font-size: 13px;
-  color: #666;
-  margin-bottom: 10px;
+  color: #334;
+  margin-bottom: 14px;
 }
 
 /* 캐러셀 */
@@ -34,19 +40,19 @@ body {
   display: flex;
   gap: 20px;
   overflow-x: auto;
-  padding: 10px 20px 20px 20px;
+  padding: 10px 20px 18px 20px;
 }
 
-/* 스크롤바 보이게 */
+/* 스크롤바 */
 .carousel::-webkit-scrollbar {
   height: 8px;
 }
 .carousel::-webkit-scrollbar-thumb {
-  background: #ccc;
+  background: rgba(255,255,255,0.7);
   border-radius: 10px;
 }
 .carousel::-webkit-scrollbar-track {
-  background: transparent;
+  background: rgba(255,255,255,0.3);
 }
 
 .carousel iframe {
@@ -55,21 +61,19 @@ body {
   height: 300px;
   border-radius: 14px;
   border: none;
+  background: #000;
 }
 </style>
 </head>
 
 <body>
 
-<div class="title">LD Sample</div>
-<div class="subtitle">Live2D Rigging Video Samples</div>
+<div class="wrapper">
 
-<div class="carousel">
-  <iframe src="https://www.youtube.com/embed/QkrOsMwS6Jc" allowfullscreen></iframe>
-  <iframe src="https://www.youtube.com/embed/VTTCGMLKsck" allowfullscreen></iframe>
-  <iframe src="https://www.youtube.com/embed/o5cCjZhmjW0" allowfullscreen></iframe>
-  <iframe src="https://www.youtube.com/embed/XVWdGuv98cA" allowfullscreen></iframe>
-</div>
+  <div class="title">LD Sample</div>
+  <div class="subtitle">Live2D Rigging Video Samples</div>
 
-</body>
-</html>
+  <div class="carousel">
+    <iframe src="https://www.youtube.com/embed/QkrOsMwS6Jc" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/VTTCGMLKsck" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/o5cCjZhmjW0" allowfullscreen></iframe>
