@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LD Video Carousel</title>
+
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.carousel {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 20px;
+  scroll-behavior: smooth;
+}
+
+.carousel iframe {
+  flex-shrink: 0;
+  width: 450px;
+  height: 300px;
+  border-radius: 14px;
+  border: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="carousel">
+
+  <iframe src="https://www.youtube.com/embed/QkrOsMwS6Jc" allowfullscreen></iframe>
+  <iframe src="https://www.youtube.com/embed/VTTCGMLKsck" allowfullscreen></iframe>
+  <iframe src="https://www.youtube.com/embed/o5cCjZhmjW0" allowfullscreen></iframe>
+  <iframe src="https://www.youtube.com/embed/XVWdGuv98cA" allowfullscreen></iframe>
+
+</div>
+
+</body>
+</html>
