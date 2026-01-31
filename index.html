@@ -15,7 +15,7 @@ body {
 
 /* 카드 배경 */
 .card {
-  max-width: 500px;
+  max-width: 840px;
   margin: 0 auto;
   background: #acc9fc;
   border-radius: 16px;
@@ -38,19 +38,21 @@ body {
   margin-bottom: 10px;
 }
 
-/* 캐러셀 */
-.carousel {
-  position: relative;
-  width: 100%;
-  height: 300px;
-  overflow: hidden;
-}
+
 
 /* 트랙 */
 .track {
   display: flex;
   height: 100%;
   transition: transform 0.4s ease;
+}
+
+/* 캐러셀 */
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 472px; /* 840 * 9 / 16 */
+  overflow: hidden;
 }
 
 /* 슬라이드 */
@@ -64,12 +66,14 @@ body {
 
 /* 영상 */
 .slide iframe {
-  width: 450px;
-  height: 300px;
+  width: 100%;
+  max-width: 840px;
+  height: 100%;
   border-radius: 14px;
   border: none;
   display: block;
 }
+
 
 /* 좌우 버튼 */
 .arrow {
