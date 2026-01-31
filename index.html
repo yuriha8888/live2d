@@ -12,9 +12,11 @@ body {
   font-family: Arial, sans-serif;
 }
 
-/* 전체 래퍼 */
+/* 전체 */
 .wrapper {
-  padding: 14px 0 20px;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 16px 0 24px;
 }
 
 /* 제목 */
@@ -23,40 +25,32 @@ body {
   font-size: 20px;
   font-weight: bold;
   color: #1f2d5a;
-  margin-bottom: 6px;
 }
 
 .subtitle {
   text-align: center;
   font-size: 13px;
   color: #2e3a66;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
-/* 캐러셀 */
-.carousel {
+/* 캐러셀 영역 */
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+}
+
+/* 슬라이드 트랙 */
+.carousel-track {
   display: flex;
-  gap: 12px;
-  padding: 10px 16px 20px;
-  overflow-x: auto;
-
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-}
-
-/* 스크롤바 */
-.carousel::-webkit-scrollbar {
-  height: 6px;
-}
-.carousel::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.85);
-  border-radius: 10px;
+  transition: transform 0.45s ease;
 }
 
 /* 슬라이드 */
 .slide {
-  scroll-snap-align: center;
-  flex-shrink: 0;
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .slide iframe {
@@ -64,7 +58,44 @@ body {
   height: 300px;
   border-radius: 14px;
   border: none;
-  background: #000;
+}
+
+/* 화살표 */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.85);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #1f2d5a;
+}
+
+.arrow.left { left: 6px; }
+.arrow.right { right: 6px; }
+
+/* 인디케이터 */
+.indicators {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.indicators span {
+  width: 8px;
+  height: 8px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.indicators span.active {
+  background: #1f2d5a;
 }
 </style>
 </head>
@@ -75,26 +106,58 @@ body {
   <div class="title">LD Sample</div>
   <div class="subtitle">Live2D Rigging Video Samples</div>
 
-  <div class="carousel">
+  <div class="carousel-container">
+    <button class="arrow left" onclick="prev()">‹</button>
+    <button class="arrow right" onclick="next()">›</button>
 
-    <div class="slide">
-      <iframe src="https://www.youtube.com/embed/QkrOsMwS6Jc" allowfullscreen></iframe>
+    <div class="carousel-track" id="track">
+      <div class="slide"><iframe src="https://www.youtube.com/embed/QkrOsMwS6Jc" allowfullscreen></iframe></div>
+      <div class="slide"><iframe src="https://www.youtube.com/embed/VTTCGMLKsck" allowfullscreen></iframe></div>
+      <div class="slide"><iframe src="https://www.youtube.com/embed/o5cCjZhmjW0" allowfullscreen></iframe></div>
+      <div class="slide"><iframe src="https://www.youtube.com/embed/XVWdGuv98cA" allowfullscreen></iframe></div>
     </div>
-
-    <div class="slide">
-      <iframe src="https://www.youtube.com/embed/VTTCGMLKsck" allowfullscreen></iframe>
-    </div>
-
-    <div class="slide">
-      <iframe src="https://www.youtube.com/embed/o5cCjZhmjW0" allowfullscreen></iframe>
-    </div>
-
-    <div class="slide">
-      <iframe src="https://www.youtube.com/embed/XVWdGuv98cA" allowfullscreen></iframe>
-    </div>
-
   </div>
+
+  <div class="indicators" id="indicators"></div>
 </div>
+
+<script>
+const track = document.getElementById("track");
+const slides = document.querySelectorAll(".slide");
+const indicators = document.getElementById("indicators");
+
+let index = 0;
+
+/* 인디케이터 생성 */
+slides.forEach((_, i) => {
+  const dot = document.createElement("span");
+  if (i === 0) dot.classList.add("active");
+  dot.onclick = () => moveTo(i);
+  indicators.appendChild(dot);
+});
+
+function update() {
+  track.style.transform = `translateX(-${index * 100}%)`;
+  document.querySelectorAll(".indicators span").forEach((dot, i) => {
+    dot.classList.toggle("active", i === index);
+  });
+}
+
+function next() {
+  index = (index + 1) % slides.length;
+  update();
+}
+
+function prev() {
+  index = (index - 1 + slides.length) % slides.length;
+  update();
+}
+
+function moveTo(i) {
+  index = i;
+  update();
+}
+</script>
 
 </body>
 </html>
