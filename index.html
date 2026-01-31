@@ -7,41 +7,43 @@
 <title>LD Sample</title>
 
 <style>
+/* 페이지 전체는 투명 */
 body {
   margin: 0;
-  background: #acc9fc;
+  background: transparent;
   font-family: Arial, sans-serif;
 }
 
-/* 전체 래퍼 */
-.wrapper {
-  width: 100%;
+/* 배경 카드 (아트머그 폭 기준) */
+.card {
   max-width: 500px;
   margin: 0 auto;
-  padding: 16px 0 20px;
+  background: #acc9fc;
+  border-radius: 16px;
+  padding: 14px 0 16px;
 }
 
 /* 제목 */
 .title {
   text-align: center;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 18px;
   color: #1f2d5a;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .subtitle {
   text-align: center;
-  font-size: 13px;
-  color: #334;
-  margin-bottom: 12px;
+  font-size: 12px;
+  color: #2e3a66;
+  margin-bottom: 10px;
 }
 
 /* 캐러셀 */
 .carousel {
   position: relative;
   width: 100%;
-  overflow: hidden; /* 🔥 중요 */
+  overflow: hidden;
 }
 
 /* 트랙 */
@@ -52,7 +54,7 @@ body {
 
 /* 슬라이드 */
 .slide {
-  flex: 0 0 100%; 
+  flex: 0 0 100%;
   display: flex;
   justify-content: center;
 }
@@ -74,23 +76,94 @@ body {
   height: 34px;
   border-radius: 50%;
   border: none;
-  background: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.9);
   font-size: 20px;
   cursor: pointer;
-  z-index: 10;
+  z-index: 20;              /* 🔥 iframe 위로 */
+  pointer-events: auto;     /* 🔥 클릭 활성 */
 }
 
-.arrow.left { left: 6px; }
-.arrow.right { right: 6px; }
+.arrow.left { left: 8px; }
+.arrow.right { right: 8px; }
 
 /* 인디케이터 */
 .dots {
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-top: 12px;
+  margin-top: 10px;
 }
 
 .dots span {
   width: 8px;
   height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.6);
+  cursor: pointer;
+}
+
+.dots .active {
+  background: #1f2d5a;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <div class="title">LD Sample</div>
+  <div class="subtitle">Live2D Rigging Video</div>
+
+  <div class="carousel">
+    <button class="arrow left" onclick="prev()">‹</button>
+    <button class="arrow right" onclick="next()">›</button>
+
+    <div class="track" id="track">
+      <div class="slide"><iframe src="https://www.youtube.com/embed/QkrOsMwS6Jc" allowfullscreen></iframe></div>
+      <div class="slide"><iframe src="https://www.youtube.com/embed/VTTCGMLKsck" allowfullscreen></iframe></div>
+      <div class="slide"><iframe src="https://www.youtube.com/embed/o5cCjZhmjW0" allowfullscreen></iframe></div>
+      <div class="slide"><iframe src="https://www.youtube.com/embed/XVWdGuv98cA" allowfullscreen></iframe></div>
+    </div>
+  </div>
+
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+const track = document.getElementById("track");
+const slides = document.querySelectorAll(".slide");
+const dots = document.getElementById("dots");
+let index = 0;
+
+slides.forEach((_, i) => {
+  const dot = document.createElement("span");
+  if (i === 0) dot.classList.add("active");
+  dot.onclick = () => move(i);
+  dots.appendChild(dot);
+});
+
+function update() {
+  track.style.transform = `translateX(-${index * 100}%)`;
+  dots.querySelectorAll("span").forEach((d, i) =>
+    d.classList.toggle("active", i === index)
+  );
+}
+
+function next() {
+  index = (index + 1) % slides.length;
+  update();
+}
+
+function prev() {
+  index = (index - 1 + slides.length) % slides.length;
+  update();
+}
+
+function move(i) {
+  index = i;
+  update();
+}
+</script>
+
+</body>
+</html>
