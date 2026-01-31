@@ -3,21 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LD Video Carousel</title>
+<title>LD Sample</title>
 
 <style>
 body {
   margin: 0;
   padding: 0;
   background: transparent;
+  font-family: Arial, sans-serif;
 }
 
+/* 제목 */
+.title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 12px 0 6px 0;
+}
+
+/* 설명(선택) */
+.subtitle {
+  text-align: center;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+/* 캐러셀 */
 .carousel {
   display: flex;
   gap: 20px;
   overflow-x: auto;
-  padding: 20px;
-  scroll-behavior: smooth;
+  padding: 10px 20px 20px 20px;
+}
+
+/* 스크롤바 보이게 */
+.carousel::-webkit-scrollbar {
+  height: 8px;
+}
+.carousel::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+.carousel::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .carousel iframe {
@@ -32,13 +61,14 @@ body {
 
 <body>
 
-<div class="carousel">
+<div class="title">LD Sample</div>
+<div class="subtitle">Live2D Rigging Video Samples</div>
 
+<div class="carousel">
   <iframe src="https://www.youtube.com/embed/QkrOsMwS6Jc" allowfullscreen></iframe>
   <iframe src="https://www.youtube.com/embed/VTTCGMLKsck" allowfullscreen></iframe>
   <iframe src="https://www.youtube.com/embed/o5cCjZhmjW0" allowfullscreen></iframe>
   <iframe src="https://www.youtube.com/embed/XVWdGuv98cA" allowfullscreen></iframe>
-
 </div>
 
 </body>
