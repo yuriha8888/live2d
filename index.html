@@ -6,6 +6,7 @@
 <title>LD Sample</title>
 
 <style>
+/* 기본 */
 body {
   margin: 0;
   background: transparent;
@@ -18,7 +19,7 @@ body {
   margin: 0 auto;
   background: #acc9fc;
   border-radius: 16px;
-  padding: 14px 0 16px;
+  padding: 14px 0 22px; /* 🔥 아래 여백 확보 */
 }
 
 /* 제목 */
@@ -82,29 +83,36 @@ body {
   background: rgba(255,255,255,0.9);
   font-size: 20px;
   cursor: pointer;
-  z-index: 10;
+  z-index: 20;
 }
 
 .arrow.left { left: 8px; }
 .arrow.right { right: 8px; }
 
-/* 하단 인디케이터 */
+/* 하단 슬라이드바 */
 .dots {
   display: flex;
   justify-content: center;
-  gap: 8px;
-  margin-top: 10px;
+  align-items: center;
+  gap: 10px;
+
+  height: 16px;          /* 🔥 높이 강제 */
+  margin-top: 14px;
+  padding-bottom: 6px;
+
+  position: relative;
+  z-index: 20;
 }
 
 .dots span {
-  width: 8px;
-  height: 8px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.6);
+  background: rgba(31,45,90,0.35);
   cursor: pointer;
 }
 
-.dots .active {
+.dots span.active {
   background: #1f2d5a;
 }
 </style>
@@ -145,6 +153,7 @@ body {
     </div>
   </div>
 
+  <!-- 🔥 슬라이드바 -->
   <div class="dots" id="dots"></div>
 </div>
 
@@ -155,7 +164,7 @@ const dots = document.getElementById("dots");
 
 let index = 0;
 
-/* 인디케이터 생성 */
+/* 슬라이드바 생성 */
 slides.forEach((_, i) => {
   const dot = document.createElement("span");
   if (i === 0) dot.classList.add("active");
