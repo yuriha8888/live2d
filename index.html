@@ -12,7 +12,7 @@ body {
   font-family: Arial, sans-serif;
 }
 
-/* 카드 */
+/* 카드 배경 */
 .card {
   max-width: 500px;
   margin: 0 auto;
@@ -41,14 +41,14 @@ body {
 .carousel {
   position: relative;
   width: 100%;
-  height: 300px;        
+  height: 300px;
   overflow: hidden;
 }
 
 /* 트랙 */
 .track {
   display: flex;
-  height: 100%;          
+  height: 100%;
   transition: transform 0.4s ease;
 }
 
@@ -63,14 +63,14 @@ body {
 
 /* 영상 */
 .slide iframe {
-  display: block;         
   width: 450px;
   height: 300px;
   border-radius: 14px;
   border: none;
+  display: block;
 }
 
-/* 버튼 */
+/* 좌우 버튼 */
 .arrow {
   position: absolute;
   top: 50%;
@@ -88,7 +88,7 @@ body {
 .arrow.left { left: 8px; }
 .arrow.right { right: 8px; }
 
-/* 인디케이터 */
+/* 하단 인디케이터 */
 .dots {
   display: flex;
   justify-content: center;
@@ -125,17 +125,23 @@ body {
       <div class="slide">
         <iframe src="https://www.youtube.com/embed/XVWdGuv98cA" allowfullscreen></iframe>
       </div>
+
       <div class="slide">
         <iframe src="https://www.youtube.com/embed/QkrOsMwS6Jc" allowfullscreen></iframe>
       </div>
+
       <div class="slide">
         <iframe src="https://www.youtube.com/embed/VTTCGMLKsck" allowfullscreen></iframe>
       </div>
+
       <div class="slide">
         <iframe src="https://www.youtube.com/embed/o5cCjZhmjW0" allowfullscreen></iframe>
       </div>
+
       <div class="slide">
         <iframe src="https://www.youtube.com/embed/BJ6W7zSCWvI" allowfullscreen></iframe>
+      </div>
+
     </div>
   </div>
 
@@ -146,20 +152,22 @@ body {
 const track = document.getElementById("track");
 const slides = document.querySelectorAll(".slide");
 const dots = document.getElementById("dots");
+
 let index = 0;
 
+/* 인디케이터 생성 */
 slides.forEach((_, i) => {
   const dot = document.createElement("span");
   if (i === 0) dot.classList.add("active");
-  dot.onclick = () => move(i);
+  dot.onclick = () => moveTo(i);
   dots.appendChild(dot);
 });
 
 function update() {
   track.style.transform = `translateX(-${index * 100}%)`;
-  dots.querySelectorAll("span").forEach((d, i) =>
-    d.classList.toggle("active", i === index)
-  );
+  dots.querySelectorAll("span").forEach((dot, i) => {
+    dot.classList.toggle("active", i === index);
+  });
 }
 
 function next() {
@@ -172,7 +180,7 @@ function prev() {
   update();
 }
 
-function move(i) {
+function moveTo(i) {
   index = i;
   update();
 }
