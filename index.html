@@ -6,20 +6,19 @@
 <title>LD Sample</title>
 
 <style>
-/* 기본 */
 body {
   margin: 0;
   background: transparent;
   font-family: Arial, sans-serif;
 }
 
-/* 카드 배경 */
+/* 카드 */
 .card {
   max-width: 840px;
   margin: 0 auto;
   background: #acc9fc;
   border-radius: 16px;
-  padding: 14px 0 22px; /* 🔥 아래 여백 확보 */
+  padding: 14px 0 18px;
 }
 
 /* 제목 */
@@ -28,7 +27,6 @@ body {
   font-size: 18px;
   font-weight: bold;
   color: #1f2d5a;
-  margin-bottom: 2px;
 }
 
 .subtitle {
@@ -38,16 +36,7 @@ body {
   margin-bottom: 10px;
 }
 
-
-
-/* 트랙 */
-.track {
-  display: flex;
-  height: 100%;
-  transition: transform 0.4s ease;
-}
-
-/* 캐러셀 */
+/* 메인 캐러셀 */
 .carousel {
   position: relative;
   width: 100%;
@@ -55,27 +44,28 @@ body {
   overflow: hidden;
 }
 
-/* 슬라이드 */
+.track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.4s ease;
+}
+
 .slide {
   flex: 0 0 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* 영상 */
 .slide iframe {
   width: 100%;
   max-width: 840px;
   height: 100%;
   border-radius: 14px;
   border: none;
-  display: block;
 }
 
-
-/* 좌우 버튼 */
+/* 화살표 */
 .arrow {
   position: absolute;
   top: 50%;
@@ -87,37 +77,50 @@ body {
   background: rgba(255,255,255,0.9);
   font-size: 20px;
   cursor: pointer;
-  z-index: 20;
+  z-index: 10;
 }
 
 .arrow.left { left: 8px; }
 .arrow.right { right: 8px; }
 
-/* 하단 슬라이드바 */
-.dots {
+/* 🔥 썸네일 슬라이드 */
+.thumbs {
   display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 10px;
-
-  height: 16px;          /* 🔥 높이 강제 */
-  margin-top: 14px;
-  padding-bottom: 6px;
-
-  position: relative;
-  z-index: 20;
+  margin-top: 12px;
+  padding: 0 14px;
+  overflow-x: auto;
 }
 
-.dots span {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
+.thumbs::-webkit-scrollbar {
+  height: 6px;
+}
+
+.thumbs::-webkit-scrollbar-thumb {
   background: rgba(31,45,90,0.35);
-  cursor: pointer;
+  border-radius: 10px;
 }
 
-.dots span.active {
-  background: #1f2d5a;
+.thumb {
+  flex: 0 0 auto;
+  width: 140px;
+  height: 80px;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0.6;
+  border: 2px solid transparent;
+}
+
+.thumb.active {
+  opacity: 1;
+  border-color: #1f2d5a;
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 </style>
 </head>
@@ -128,68 +131,58 @@ body {
   <div class="title">LD Sample</div>
   <div class="subtitle">Live2D Rigging Video</div>
 
+  <!-- 메인 영상 -->
   <div class="carousel">
     <button class="arrow left" onclick="prev()">‹</button>
     <button class="arrow right" onclick="next()">›</button>
 
     <div class="track" id="track">
-
-      <div class="slide">
-        <iframe src="https://www.youtube.com/embed/XVWdGuv98cA" allowfullscreen></iframe>
-      </div>
-
-      <div class="slide">
-        <iframe src="https://www.youtube.com/embed/QkrOsMwS6Jc" allowfullscreen></iframe>
-      </div>
-
-      <div class="slide">
-        <iframe src="https://www.youtube.com/embed/VTTCGMLKsck" allowfullscreen></iframe>
-      </div>
-
-      <div class="slide">
-        <iframe src="https://www.youtube.com/embed/o5cCjZhmjW0" allowfullscreen></iframe>
-      </div>
-
-      <div class="slide">
-        <iframe src="https://www.youtube.com/embed/BJ6W7zSCWvI" allowfullscreen></iframe>
-      </div>
-
+      <div class="slide"><iframe src="https://www.youtube.com/embed/XVWdGuv98cA" allowfullscreen></iframe></div>
+      <div class="slide"><iframe src="https://www.youtube.com/embed/QkrOsMwS6Jc" allowfullscreen></iframe></div>
+      <div class="slide"><iframe src="https://www.youtube.com/embed/VTTCGMLKsck" allowfullscreen></iframe></div>
+      <div class="slide"><iframe src="https://www.youtube.com/embed/o5cCjZhmjW0" allowfullscreen></iframe></div>
+      <div class="slide"><iframe src="https://www.youtube.com/embed/BJ6W7zSCWvI" allowfullscreen></iframe></div>
     </div>
   </div>
 
-  <!-- 🔥 슬라이드바 -->
-  <div class="dots" id="dots"></div>
+  <!-- 🔥 미리보기 -->
+  <div class="thumbs" id="thumbs">
+    <div class="thumb active" onclick="moveTo(0)">
+      <img src="https://img.youtube.com/vi/XVWdGuv98cA/hqdefault.jpg">
+    </div>
+    <div class="thumb" onclick="moveTo(1)">
+      <img src="https://img.youtube.com/vi/QkrOsMwS6Jc/hqdefault.jpg">
+    </div>
+    <div class="thumb" onclick="moveTo(2)">
+      <img src="https://img.youtube.com/vi/VTTCGMLKsck/hqdefault.jpg">
+    </div>
+    <div class="thumb" onclick="moveTo(3)">
+      <img src="https://img.youtube.com/vi/o5cCjZhmjW0/hqdefault.jpg">
+    </div>
+    <div class="thumb" onclick="moveTo(4)">
+      <img src="https://img.youtube.com/vi/BJ6W7zSCWvI/hqdefault.jpg">
+    </div>
+  </div>
 </div>
 
 <script>
 const track = document.getElementById("track");
-const slides = document.querySelectorAll(".slide");
-const dots = document.getElementById("dots");
-
+const thumbs = document.querySelectorAll(".thumb");
+const total = thumbs.length;
 let index = 0;
-
-/* 슬라이드바 생성 */
-slides.forEach((_, i) => {
-  const dot = document.createElement("span");
-  if (i === 0) dot.classList.add("active");
-  dot.onclick = () => moveTo(i);
-  dots.appendChild(dot);
-});
 
 function update() {
   track.style.transform = `translateX(-${index * 100}%)`;
-  dots.querySelectorAll("span").forEach((dot, i) => {
-    dot.classList.toggle("active", i === index);
-  });
+  thumbs.forEach((t, i) => t.classList.toggle("active", i === index));
 }
 
 function next() {
-  index = (index + 1) % slides.length;
+  index = (index + 1) % total;
   update();
 }
 
 function prev() {
-  index = (index - 1 + slides.length) % slides.length;
+  index = (index - 1 + total) % total;
   update();
 }
 
