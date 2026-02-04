@@ -3,44 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Live2D + Carousel</title>
+<title>LD Sample</title>
 
 <style>
-/* 기본 */
 body {
   margin: 0;
-  background: #f9f9f9;
+  background: transparent;
   font-family: Arial, sans-serif;
 }
 
-/* 카드 전체 */
-.wrapper {
+/* 카드 */
+.card {
   max-width: 840px;
   margin: 0 auto;
-  background: #fff;
-  border-radius: 12px;
-  padding: 20px;
+  background: #acc9fc;
+  border-radius: 16px;
+  padding: 14px 0 18px;
 }
 
-/* Live2D 데모 상단 */
-.live2d-container {
-  width: 100%;
-  height: auto;
-  margin-bottom: 24px;
+/* 제목 */
+.title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #1f2d5a;
 }
 
-.live2d-container iframe {
-  width: 100%;
-  height: 480px;
-  border: none;
-  border-radius: 14px;
+.subtitle {
+  text-align: center;
+  font-size: 12px;
+  color: #2e3a66;
+  margin-bottom: 10px;
 }
 
 /* 메인 캐러셀 */
 .carousel {
   position: relative;
   width: 100%;
-  height: 472px; /* 16:9 비율 */
+  height: 472px; /* 840 * 9 / 16 */
   overflow: hidden;
 }
 
@@ -65,17 +65,17 @@ body {
   border: none;
 }
 
-/* 좌우 버튼 */
+/* 화살표 */
 .arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.85);
   border: none;
-  font-size: 22px;
+  background: rgba(255,255,255,0.9);
+  font-size: 20px;
   cursor: pointer;
   z-index: 10;
 }
@@ -83,18 +83,19 @@ body {
 .arrow.left { left: 8px; }
 .arrow.right { right: 8px; }
 
-/* 썸네일 미리보기 */
+/* 🔥 썸네일 슬라이드 */
 .thumbs {
   display: flex;
   gap: 10px;
-  margin-top: 14px;
-  padding: 0 10px;
+  margin-top: 12px;
+  padding: 0 14px;
   overflow-x: auto;
 }
 
 .thumbs::-webkit-scrollbar {
   height: 6px;
 }
+
 .thumbs::-webkit-scrollbar-thumb {
   background: rgba(31,45,90,0.35);
   border-radius: 10px;
@@ -107,8 +108,8 @@ body {
   border-radius: 10px;
   overflow: hidden;
   cursor: pointer;
-  border: 2px solid transparent;
   opacity: 0.6;
+  border: 2px solid transparent;
 }
 
 .thumb.active {
@@ -121,39 +122,16 @@ body {
   height: 100%;
   object-fit: cover;
 }
-
-/* 하단 점 인디케이터 */
-.dots {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.dots span {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: rgba(31,45,90,0.35);
-  cursor: pointer;
-}
-
-.dots span.active {
-  background: #1f2d5a;
-}
 </style>
 </head>
 
 <body>
 
-<div class="wrapper">
+<div class="card">
+  <div class="title">LD Sample</div>
+  <div class="subtitle">Live2D Rigging Video</div>
 
-  <!-- Live2D 데모 상단 -->
-  <div class="live2d-container">
-    <iframe src="https://yuriha8888.github.io/live2d/" allowfullscreen></iframe>
-  </div>
-
-  <!-- Video Carousel -->
+  <!-- 메인 영상 -->
   <div class="carousel">
     <button class="arrow left" onclick="prev()">‹</button>
     <button class="arrow right" onclick="next()">›</button>
@@ -167,48 +145,44 @@ body {
     </div>
   </div>
 
-  <!-- 썸네일 -->
+  <!-- 🔥 미리보기 -->
   <div class="thumbs" id="thumbs">
-    <div class="thumb active" onclick="moveTo(0)"><img src="https://img.youtube.com/vi/XVWdGuv98cA/hqdefault.jpg"></div>
-    <div class="thumb" onclick="moveTo(1)"><img src="https://img.youtube.com/vi/QkrOsMwS6Jc/hqdefault.jpg"></div>
-    <div class="thumb" onclick="moveTo(2)"><img src="https://img.youtube.com/vi/VTTCGMLKsck/hqdefault.jpg"></div>
-    <div class="thumb" onclick="moveTo(3)"><img src="https://img.youtube.com/vi/o5cCjZhmjW0/hqdefault.jpg"></div>
-    <div class="thumb" onclick="moveTo(4)"><img src="https://img.youtube.com/vi/BJ6W7zSCWvI/hqdefault.jpg"></div>
+    <div class="thumb active" onclick="moveTo(0)">
+      <img src="https://img.youtube.com/vi/XVWdGuv98cA/hqdefault.jpg">
+    </div>
+    <div class="thumb" onclick="moveTo(1)">
+      <img src="https://img.youtube.com/vi/QkrOsMwS6Jc/hqdefault.jpg">
+    </div>
+    <div class="thumb" onclick="moveTo(2)">
+      <img src="https://img.youtube.com/vi/VTTCGMLKsck/hqdefault.jpg">
+    </div>
+    <div class="thumb" onclick="moveTo(3)">
+      <img src="https://img.youtube.com/vi/o5cCjZhmjW0/hqdefault.jpg">
+    </div>
+    <div class="thumb" onclick="moveTo(4)">
+      <img src="https://img.youtube.com/vi/BJ6W7zSCWvI/hqdefault.jpg">
+    </div>
   </div>
-
-  <!-- 점 인디케이터 -->
-  <div class="dots" id="dots"></div>
-
 </div>
 
 <script>
 const track = document.getElementById("track");
-const dots = document.getElementById("dots");
 const thumbs = document.querySelectorAll(".thumb");
-const slides = document.querySelectorAll(".slide");
+const total = thumbs.length;
 let index = 0;
-
-/* 점 생성 */
-slides.forEach((_, i) => {
-  const dot = document.createElement("span");
-  if (i === 0) dot.classList.add("active");
-  dot.onclick = () => moveTo(i);
-  dots.appendChild(dot);
-});
 
 function update() {
   track.style.transform = `translateX(-${index * 100}%)`;
-  dots.querySelectorAll("span").forEach((d, i) => d.classList.toggle("active", i === index));
   thumbs.forEach((t, i) => t.classList.toggle("active", i === index));
 }
 
 function next() {
-  index = (index + 1) % slides.length;
+  index = (index + 1) % total;
   update();
 }
 
 function prev() {
-  index = (index - 1 + slides.length) % slides.length;
+  index = (index - 1 + total) % total;
   update();
 }
 
